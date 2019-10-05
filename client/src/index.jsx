@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
-import Axios from 'axios';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -11,22 +11,42 @@ class App extends React.Component {
     this.state = {
       repos: []
     }
-
+    this.getAll = this.getAll.bind(this);
   }
 
+  getAll() {
+    $.get({
+      url: 'http://localhost:1128/repos',
+      success: (response) => {
+        var stars=[];
+        for(var i=0; i<response.length; i++) {
+          stars.push(response[i].stars)
+        }
+        console.log(stars)
+        this.setState({
+          repos: response
+        })
+      }
+    })
+  }
+  componentDidMount() {
+    this.getAll();
+  }
   search (term) {
-    var name = term
+    //var name = term
     console.log(`${term} was searched`);
     // TODO
     // Axios.post('/repos', {name})
     $.post({
-      url: 'http://localhost:1128/repos',
+      url: 'http://localhost:1128/users',
       data: {term: term},
       success: (response)=> {
         console.log(response)
+        this.getAll();
       },
       datatype: 'string'
     })
+
   }
 
   render () {

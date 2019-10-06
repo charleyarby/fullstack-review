@@ -23,10 +23,10 @@ app.post('/users', function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
-  repo.findAll( (allRepo) => {
-    //console.log(res)
-    var repoName = [];
-    res.send(allRepo);
+  repo.findAll( (err, docs) => {
+    console.log(docs)
+    //var repoName = [];
+    res.send(docs);
 
   })
 

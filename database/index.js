@@ -12,7 +12,7 @@ let repoSchema = mongoose.Schema({
   login: String,
   UserID: Number,
   reponame: String,
-  stars: String,
+  stars: Number,
   repoID: Number,
  // unique: true
  });
@@ -50,14 +50,18 @@ let save = (user, callback) => {
   })
 }
 let findAll = (callback) => {
-  var repos = Repo.find({}, function(err, docs) {
-    callback(docs);
-  })
+  Repo.find({})
+      .sort({stars: 'descending'})
+      .limit(25)
+      .exec(callback);
 
 }
 module.exports.save = save;
 module.exports.findAll = findAll;
 
+var cb = function(err, docs) {
+  callback(docs);
+}
 // numberOfRepos++
 // var data = new Repo({repoID: oneRepo.id,
 //                      reponame: oneRepo.name,

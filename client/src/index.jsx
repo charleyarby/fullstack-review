@@ -18,11 +18,6 @@ class App extends React.Component {
     $.get({
       url: 'http://localhost:1128/repos',
       success: (response) => {
-        var stars=[];
-        for(var i=0; i<response.length; i++) {
-          stars.push(response[i].stars)
-        }
-        console.log(stars)
         this.setState({
           repos: response
         })

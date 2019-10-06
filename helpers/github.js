@@ -21,8 +21,8 @@ let getReposByUsername = (user, callback) => {
       console.log(error)
     }
     if(!error) {
-    body = JSON.parse(body)
-    db.save(body, function(res) {
+      body = JSON.parse(body)
+      db.save(body, function(res) {
       console.log(res, 'length of user repo')
       console.log('from database callback')
       callback();

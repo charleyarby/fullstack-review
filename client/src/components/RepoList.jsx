@@ -8,7 +8,7 @@ const RepoList = (props) => {
     There are {props.repos.length} repos.
     <div>
       {props.repos.map((oneRepo) => (
-        <li>{`${oneRepo.reponame} by ${oneRepo.login} Number of Start = ${oneRepo.stars}`}</li>
+        <li>{`${oneRepo.reponame} by ${oneRepo.login} Number of Stars = ${oneRepo.stars}`}</li>
       ))}
     </div>
   </div>
